@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RutPipe } from 'projects/ng9-rut/src/lib/rut.pipe';
-import { RutDirective } from 'projects/ng9-rut/src/lib/rut.directive';
-import { RutValidator } from 'projects/ng9-rut/src/lib/rut.validator';
-import { RutValueAccessor } from 'projects/ng9-rut/src/lib/rut-value-accessor';
+import { RutPipe } from './rut.pipe';
+import { RutDirective } from './rut.directive';
+import { RutValidator } from './rut.validator';
+import { RutValueAccessor } from './rut-value-accessor';
 
 
 

@@ -3,5 +3,8 @@
   "dest": "../../dist/ng9-rut",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "rut-helpers"
+  ]
 }

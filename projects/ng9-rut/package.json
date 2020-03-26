@@ -1,6 +1,9 @@
 {
   "name": "ng9-rut",
-  "version": "0.0.1",
+  "version": "0.0.6",
+  "dependencies": {
+    "rut-helpers": "0.1.0"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
