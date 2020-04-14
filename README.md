@@ -21,7 +21,7 @@ The easiest way to use this library is to import Ng2Rut in your app's main modul
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { Ng9Rut } from 'ng9-rut';
+import { Ng9RutModule } from 'ng9-rut';
 import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
