@@ -28,7 +28,7 @@ import { BrowserModule } from '@angular/platform-browser';
   ...
   imports: [
     BrowserModule,
-    Ng9Rut
+    Ng9RutModule
   ],
 })
 class DemoAppModule { }
