@@ -50,6 +50,7 @@ ng9-rut exposes multiple features that can be used to perform input validation a
 
 ```typescript
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { RutValidator } from 'ng9-rut';
 export class DemoAppComponent {
   constructor (fb: FormBuilder, rutValidator: RutValidator) {
     this.reactiveForm = fb.group({
