@@ -11,4 +11,5 @@ before_script:
 script:
 # TODO: LINTING
 # - ng lint 
+- ng test
 - ng build --prod
