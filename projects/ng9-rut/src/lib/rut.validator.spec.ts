@@ -33,6 +33,12 @@ describe('RutValidator: ReactiveForms', () => {
     rutControl.setValue('7618285K');
     expect(rutValidator.validate(rutControl)).toBeNull();
   });
+
+  it('should parse undefined RUTs as valid', () => {
+    let rutControl: FormControl = new FormControl();
+    rutControl.setValue(undefined);
+    expect(rutValidator.validate(rutControl)).toBeNull();
+  });
 });
 
 @Component({
@@ -79,6 +85,13 @@ describe('RutValidator: TemplateForm', () => {
 
   it('should parse valid RUTs without formatting as valid', () => {
     nativeInput.value = '7618285K';
+    nativeInput.dispatchEvent(newEvent('input'));
+    fixture.detectChanges();
+    expect(ngModel.valid).toBe(true);
+  });
+
+  it('should parse undefined RUTs as valid', () => {
+    nativeInput.value = '';
     nativeInput.dispatchEvent(newEvent('input'));
     fixture.detectChanges();
     expect(ngModel.valid).toBe(true);
