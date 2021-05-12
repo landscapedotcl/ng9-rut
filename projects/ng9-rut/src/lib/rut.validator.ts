@@ -3,7 +3,10 @@ import { NG_VALIDATORS, FormControl } from '@angular/forms';
 import { rutValidate } from 'rut-helpers';
 
 export function validateRutFactory(rutValidate: Function) {
-  return (c: FormControl) => {
+  return (c: FormControl) => {    
+    if (!c.value) {
+      return null;
+    }
     return rutValidate(c.value) ? null : { invalidRut: true };
   };
 }
@@ -16,11 +19,11 @@ export function validateRutFactory(rutValidate: Function) {
 })
 export class RutValidator {
   private validator: Function;
-
+  
   constructor() {
     this.validator = validateRutFactory(rutValidate);
   }
-
+  
   public validate(c: FormControl) {
     return this.validator(c);
   }
