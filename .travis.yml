@@ -6,10 +6,11 @@ sudo: required
 branches:
   only:
   - master
-  - develop
 before_script:
   - npm install -g @angular/cli
   - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
 # TODO: LINTING
 # - ng lint 
