@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { rutFormat } from 'rut-helpers';
+import { rutFormat } from './rut-helpers';
 
 @Pipe({
   name: 'rut',

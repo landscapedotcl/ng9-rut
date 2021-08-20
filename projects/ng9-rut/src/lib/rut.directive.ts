@@ -1,5 +1,5 @@
 import {Directive, EventEmitter, Output} from '@angular/core';
-import * as rutHelpers from 'rut-helpers';
+import * as rutHelpers from './rut-helpers';
 
 @Directive({
   selector: '[formatRut]',
