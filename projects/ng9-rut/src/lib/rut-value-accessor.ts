@@ -1,6 +1,6 @@
 import { Directive, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { rutFormat } from 'rut-helpers';
+import { rutFormat } from './rut-helpers';
 
 import { ElementRef, Renderer2 } from '@angular/core';
 
