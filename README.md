@@ -26,6 +26,14 @@ Esta librería está diseñada para funcionar con **Node.js 12.x o superior**.
 
 **Nota importante:** Esta librería está basada en **Angular 9**, que es una versión antigua (lanzada en 2020). Para proyectos nuevos, se recomienda usar versiones más recientes de Angular que soporten Node.js más actuales.
 
+### Angular Version Compatibility
+
+| Versión de la librería | Compatibilidad Angular | Estado |
+|------------------------|------------------------|--------|
+| 0.1.1 | 9.1.0 - 15.x | ✅ Compatible |
+
+**Nota:** Para versiones de Angular 16+ se requerirían actualizaciones en el código debido a cambios en las APIs de validación y forms.
+
 ## Usage
 
 ### Set-up:
