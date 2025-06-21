@@ -1,44 +1,41 @@
-Angular 9 RUT
-=============
+Angular 17 RUT
+==============
 
-Fork de https://github.com/platanus/ng2-rut para funcionar bajo Angular 9 debido a librerías deprecadas.
+Modern Angular 17+ library with several components to handle [Chilean RUT](https://en.wikipedia.org/wiki/National_identification_number#Chile) validation, cleaning and formatting.
 
-Angular 9 library with several components to handle [Chilean RUT](https://en.wikipedia.org/wiki/National_identification_number#Chile) validation, cleaning and formatting.
+Originally forked from [ng2-rut](https://github.com/platanus/ng2-rut) and fully updated to work with Angular 17+ and modern development practices.
 
 ## Installation
 
 ```bash
-yarn add ng9-rut
-# or
 npm install ng9-rut --save
+# or
+yarn add ng9-rut
 ```
 
 ## Requirements
 
 ### Node.js Version Compatibility
 
-Esta librería está diseñada para funcionar con **Node.js 12.x o superior**.
+This library is designed to work with **Node.js 18.x or higher**.
 
-**Versiones soportadas:**
-- **Mínimo:** Node.js 12.11.1
-- **Recomendado:** Node.js 12.x - 16.x (para máxima compatibilidad con Angular 9)
-- **Angular 9** (que usa esta librería) tiene soporte oficial hasta Node.js 16.x
-
-**Nota importante:** Esta librería está basada en **Angular 9**, que es una versión antigua (lanzada en 2020). Para proyectos nuevos, se recomienda usar versiones más recientes de Angular que soporten Node.js más actuales.
+**Supported versions:**
+- **Minimum:** Node.js 18.13.0
+- **Recommended:** Node.js 20.x+ (for optimal performance with Angular 17)
+- **Angular 17+** (which this library targets) officially supports Node.js 18.13.0 and higher
 
 ### Version Compatibility
 
-| lib version | angular | node | 
-|------------------------|------------------------|------------------------|
-| 0.1.1 | 9.1.0 - 15.x | 12.11.1 - 16.x |
-
-**Nota:** Para versiones de Angular 16+ se requerirían actualizaciones en el código debido a cambios en las APIs de validación y forms.
+| Library Version | Angular | Node.js | TypeScript |
+|----------------|---------|---------|------------|
+| 0.2.0+ | 17.0.0+ | 18.13.0+ | 5.4+ |
+| 0.1.1 | 9.1.0 - 16.x | 12.11.1 - 16.x | 4.7+ |
 
 ## Usage
 
 ### Set-up:
 
-The easiest way to use this library is to import Ng2Rut in your app's main module.
+The easiest way to use this library is to import `Ng9RutModule` in your app's main module.
 
 ```typescript
 import { NgModule } from '@angular/core';
@@ -46,45 +43,44 @@ import { Ng9RutModule } from 'ng9-rut';
 import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
-  ...
   imports: [
     BrowserModule,
     Ng9RutModule
   ],
 })
-class DemoAppModule { }
+class AppModule { }
 ```
 
-See `./demo` folder for a fully working example.
+### Features:
 
-### Using it:
+ng9-rut exposes multiple features that can be used to perform input validation and formatting:
 
-ng9-rut exposes multiple features that can be used to perform input validation and formatting. Probably you want to use one of the following:
-
-- `RutValidator`: Exposes the `validateRut` directive (to attach to models or inputs) and the RutValidator class to be used as `Validator` on reactive forms.
-- `RutPipe`: Exposes the `RutPipe` pipe to format rut numbers on templates
-- `RutDirective`: Exposes the `formatRut` directive to format RUT inputs.
+- **`RutValidator`**: Exposes the `ngValidateRut` directive (for template-driven forms) and the `RutValidator` class for reactive forms.
+- **`RutPipe`**: Exposes the `rut` pipe to format RUT numbers in templates.
+- **`RutDirective`**: Exposes the `ngRut` directive to format RUT inputs automatically.
 
 #### RutValidator
 
-##### Reactive forms
+##### Reactive Forms
 
 ```typescript
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RutValidator } from 'ng9-rut';
-export class DemoAppComponent {
-  constructor (fb: FormBuilder, rutValidator: RutValidator) {
-    this.reactiveForm = fb.group({
-      rut: ['30972198', [Validators.required, rutValidator]]
-    });
-  }
-}
+import { inject } from '@angular/core';
 
+export class AppComponent {
+  private fb = inject(FormBuilder);
+  private rutValidator = inject(RutValidator);
+
+  reactiveForm = this.fb.group({
+    rut: ['30972198', [Validators.required, this.rutValidator.validate]]
+  });
+}
 ```
 
-##### Template Form
+##### Template-Driven Forms
 ```html
-<input [(ngModel)]="user.rut" name="rut" validateRut required>
+<input [(ngModel)]="user.rut" name="rut" ngValidateRut required>
 ```
 
 #### RutPipe
@@ -96,16 +92,95 @@ export class DemoAppComponent {
 <!-- 3.097.219-8 -->
 ```
 
-#### formatRut (Directive)
+#### RutDirective (Auto-formatting)
 ```html
-<input [(ngModel)]="user.rut" name="rut" formatRut required>
+<input [(ngModel)]="user.rut" name="rut" ngRut required>
 <!--
-(on blur)
-3.097.219-8
-
-(on focus)
-30972198
+(on blur) → formats to: 3.097.219-8
+(on focus) → clears to: 30972198
 -->
+```
+
+### Complete Example
+
+```typescript
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { RutValidator } from 'ng9-rut';
+import { inject } from '@angular/core';
+
+@Component({
+  selector: 'app-rut-example',
+  template: `
+    <div>
+      <h3>Reactive Form</h3>
+      <form [formGroup]="reactiveForm">
+        <input formControlName="rut" placeholder="Enter RUT">
+        <div *ngIf="reactiveForm.get('rut')?.invalid && reactiveForm.get('rut')?.touched">
+          Invalid RUT
+        </div>
+      </form>
+      
+      <h3>Template Form with Auto-formatting</h3>
+      <input [(ngModel)]="templateRut" ngRut ngValidateRut placeholder="Enter RUT">
+      
+      <h3>Display with Pipe</h3>
+      <p>Formatted: {{ templateRut | rut }}</p>
+    </div>
+  `
+})
+export class RutExampleComponent {
+  private fb = inject(FormBuilder);
+  private rutValidator = inject(RutValidator);
+  
+  templateRut = '';
+  
+  reactiveForm = this.fb.group({
+    rut: ['', [Validators.required, this.rutValidator.validate]]
+  });
+}
+```
+
+## Migration from v0.1.x
+
+If you're upgrading from version 0.1.x, you need to update your directive selectors:
+
+```html
+<!-- Before (v0.1.x) -->
+<input formatRut [(ngModel)]="rut">
+<input validateRut [(ngModel)]="rut">
+
+<!-- After (v0.2.0+) -->
+<input ngRut [(ngModel)]="rut">
+<input ngValidateRut [(ngModel)]="rut">
+```
+
+The pipe and programmatic API remain unchanged.
+
+## Development
+
+### Building the Library
+
+```bash
+npm run build:lib
+```
+
+### Running Tests
+
+```bash
+npm test
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+### Publishing
+
+```bash
+npm run publish:lib
 ```
 
 ## Contributing
@@ -116,11 +191,14 @@ export class DemoAppComponent {
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed list of changes.
+
 ## Credits
 
-Esta lib fue actualizada en base al proyecto de los chicos de platanus.
-https://github.com/platanus/ng2-rut
+This library was originally forked and updated from the excellent work by [Platanus](https://github.com/platanus/ng2-rut).
 
 ## License
 
-Angular 2 RUT is © 2016 Platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

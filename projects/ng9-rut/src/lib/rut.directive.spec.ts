@@ -7,7 +7,7 @@ import { newEvent } from '../testing';
 
 @Component({
   template: `
-    <input formatRut>
+    <input ngRut>
   `,
 })
 class TestComponent { }

@@ -1,0 +1,37 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Tests
+*.spec.ts
+*.spec.js
+karma.conf.js
+tsconfig.spec.json
+
+# Development files
+tsconfig.lib.json
+tsconfig.lib.prod.json
+ng-package.json
+tslint.json
+.eslintrc.json
+
+# Build artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore 

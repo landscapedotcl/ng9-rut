@@ -43,7 +43,7 @@ describe('RutValidator: ReactiveForms', () => {
 
 @Component({
   template: `
-    <input validateRut [(ngModel)]="user.rut" name="rut">
+    <input ngValidateRut [(ngModel)]="user.rut" name="rut">
   `,
 })
 class TestComponent {

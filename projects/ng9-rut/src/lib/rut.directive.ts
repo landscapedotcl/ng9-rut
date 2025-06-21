@@ -2,7 +2,7 @@ import {Directive, EventEmitter, Output} from '@angular/core';
 import * as rutHelpers from './rut-helpers';
 
 @Directive({
-  selector: '[formatRut]',
+  selector: '[ngRut]',
   host: {
     '(blur)': 'onBlur($event)',
     '(focus)': 'onFocus($event)',
@@ -11,6 +11,7 @@ import * as rutHelpers from './rut-helpers';
 })
 export class RutDirective {
   @Output() public rutChange: EventEmitter<any>;
+  private _modelValue: string;
 
   constructor() {
     this.rutChange = new EventEmitter();
