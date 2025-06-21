@@ -13,6 +13,19 @@ yarn add ng9-rut
 npm install ng9-rut --save
 ```
 
+## Requirements
+
+### Node.js Version Compatibility
+
+Esta librería está diseñada para funcionar con **Node.js 12.x o superior**.
+
+**Versiones soportadas:**
+- **Mínimo:** Node.js 12.11.1
+- **Recomendado:** Node.js 12.x - 16.x (para máxima compatibilidad con Angular 9)
+- **Angular 9** (que usa esta librería) tiene soporte oficial hasta Node.js 16.x
+
+**Nota importante:** Esta librería está basada en **Angular 9**, que es una versión antigua (lanzada en 2020). Para proyectos nuevos, se recomienda usar versiones más recientes de Angular que soporten Node.js más actuales.
+
 ## Usage
 
 ### Set-up:

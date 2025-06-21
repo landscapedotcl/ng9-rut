@@ -32,24 +32,18 @@ describe('RutValidator: ReactiveForms', () => {
     let fixture: ComponentFixture<TestReactiveFormComponent>;
     let input: DebugElement;
     let nativeInput: HTMLInputElement;
-    let component = fixture.componentInstance;
-    beforeEach(() => {
-        TestBed.configureTestingModule({
+    let component: TestReactiveFormComponent;
+
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [TestReactiveFormComponent],
             imports: [FormsModule, ReactiveFormsModule, Ng9RutModule],
-        }).compileComponents().then(() => {
-            fixture = TestBed.createComponent(TestReactiveFormComponent);
-            fixture.detectChanges();
-        });
-
+        }).compileComponents();
+        
+        fixture = TestBed.createComponent(TestReactiveFormComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
     });
-
-    // beforeEach(() => {
-    //     fixture = TestBed.createComponent(TestReactiveFormComponent);
-    //     component = fixture.componentInstance;
-    //     fixture.detectChanges();
-    //   });
-
 
     it('should create', () => {
         expect(component).toBeTruthy();
