@@ -45,6 +45,5 @@
     }},
   "cli": {
     "analytics": "109706c9-b2fb-47b5-b181-604f614934b3"
-  },
-  "defaultProject": "ng9-rut"
+  }
 }

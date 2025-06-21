@@ -1,6 +1,6 @@
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormsModule, FormControl, NgModel } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, UntypedFormControl, NgModel } from '@angular/forms';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { RutValidator } from './rut.validator';
@@ -16,26 +16,26 @@ describe('RutValidator: ReactiveForms', () => {
   let rutValidator: RutValidator = new RutValidator();
 
   it('should parse valid RUTs as valid', () => {
-    let rutControl: FormControl = new FormControl();
+    let rutControl: UntypedFormControl = new UntypedFormControl();
     rutControl.setValue('7.618.285-K');
     expect(rutValidator.validate(rutControl)).toBeNull();
   });
 
   it('should parse invalid RUTs as invalid', () => {
-    let rutControl: FormControl = new FormControl();
+    let rutControl: UntypedFormControl = new UntypedFormControl();
     rutControl.setValue('1.111.111-1');
     let result: any = rutValidator.validate(rutControl);
     expect(result.invalidRut).toBe(true);
   });
 
   it('should parse valid RUTs without formatting as valid', () => {
-    let rutControl: FormControl = new FormControl();
+    let rutControl: UntypedFormControl = new UntypedFormControl();
     rutControl.setValue('7618285K');
     expect(rutValidator.validate(rutControl)).toBeNull();
   });
 
   it('should parse undefined RUTs as valid', () => {
-    let rutControl: FormControl = new FormControl();
+    let rutControl: UntypedFormControl = new UntypedFormControl();
     rutControl.setValue(undefined);
     expect(rutValidator.validate(rutControl)).toBeNull();
   });
